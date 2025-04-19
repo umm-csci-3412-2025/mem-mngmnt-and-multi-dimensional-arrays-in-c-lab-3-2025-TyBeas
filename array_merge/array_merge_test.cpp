@@ -8,6 +8,7 @@ void arrays_match(int size, int a[], int b[]) {
   for (i=0; i<size; ++i) {
     ASSERT_EQ(b[i], a[i]);
   }
+  free(a);
 }
 
 TEST(ArrayMerge, Handle_empty_list) {
@@ -18,7 +19,6 @@ TEST(ArrayMerge, Handle_empty_list) {
 
   result = array_merge(0, sizes,  a);
   arrays_match(1, result, expected);
-  free(result);
 }
 
 TEST(ArrayMerge, Handle_singleton_list) {
@@ -31,7 +31,6 @@ TEST(ArrayMerge, Handle_singleton_list) {
 
   result = array_merge(num_arrays, sizes, a);
   arrays_match(2, result, expected);
-  free(result);
 }
 
 TEST(ArrayMerge, Handle_one_longer_list) {
@@ -44,7 +43,6 @@ TEST(ArrayMerge, Handle_one_longer_list) {
 
   result = array_merge(num_arrays, sizes, a);
   arrays_match(8, result, expected);
-  free(result);
 }
 
 TEST(ArrayMerge, Handle_multiple_copies_of_longer_list) {
@@ -57,7 +55,6 @@ TEST(ArrayMerge, Handle_multiple_copies_of_longer_list) {
 
   result = array_merge(num_arrays, sizes, a);
   arrays_match(8, result, expected);
-  free(result);
 }
 
 TEST(ArrayMerge, Handle_multiple_copies_of_longer_list_different_orders) {
@@ -72,7 +69,6 @@ TEST(ArrayMerge, Handle_multiple_copies_of_longer_list_different_orders) {
 
   result = array_merge(num_arrays, sizes, a);
   arrays_match(8, result, expected);
-  free(result);
 }
 
 TEST(ArrayMerge, Handle_different_sizes) {
@@ -96,7 +92,6 @@ TEST(ArrayMerge, Handle_different_sizes) {
   for (i=0; i<num_arrays; ++i) {
     free(a[i]);
   }
-    free(result);
 }
 
 TEST(ArrayMerge, Handle_different_sizes_reversed) {
@@ -120,7 +115,6 @@ TEST(ArrayMerge, Handle_different_sizes_reversed) {
     for (i=0; i<num_arrays; ++i) {
         free(a[i]);
     }
-        free(result);
 }
 
 int main(int argc, char* argv[]) {

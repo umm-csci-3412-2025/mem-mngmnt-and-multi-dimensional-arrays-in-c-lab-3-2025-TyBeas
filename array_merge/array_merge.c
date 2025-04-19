@@ -1,62 +1,59 @@
 #include "array_merge.h"
-#include "../mergesort/mergesort.h"
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#include <limits.h>
 
-int totalSize(int num_arrays, int* sizes) {
-int total = 0;
-for (int i = 0; i < num_arrays; i++) {
-    total = (total + sizes[i]);
-}
-return total;
+#include "../mergesort/mergesort.h"
 
-}
+unsigned int uniqueCount(int* arrays, unsigned int length);
 
 int* array_merge(int num_arrays, int* sizes, int** values) {
-int size = totalSize(num_arrays, sizes);
+assert(num_arrays >= 0);
 
-if (num_arrays == 0) {
-    int* emptyArray = (int*) calloc(1, sizeof(int));
-    emptyArray[0] = 0;
-    return emptyArray;
+unsigned int total = 0;
+for (unsigned int i = 0; i < (unsigned int) num_arrays; i++) {
+    assert(sizes[i] >= 0);
+    total += (unsigned int) sizes[i];
 }
 
-int currentArraySize = 0;
-int currentArrayIndex = 0;
-int* temp = (int*) calloc(size, sizeof(int));
+int* buffer = (int*) calloc(total + 1, sizeof(int));
 
-for (int i = 0; i < num_arrays; i++) {
-    currentArraySize = sizes[i];
-    for (int j = 0; j < sizes[i]; j++) {
-        temp[currentArrayIndex] = values[i][j];
-        currentArrayIndex++;
+if (total == 0) {
+    buffer[0] = 0;
+    return buffer;
+}
+
+unsigned int index = 1;
+for (unsigned int i = 0; i < (unsigned int) num_arrays; i++) {
+    memcpy(buffer + index, values[i], sizes[i] * sizeof(int));
+    index += sizes[i];
     }
+
+unsigned int uniqueCount = make_unique(buffer + 1, total);
+
+assert(uniqueCount <= INT_MAX);
+
+buffer[0] = (int) uniqueCount;
+
+return buffer;
 }
 
-mergesort(currentArrayIndex, temp);
+unsigned int make_unique(int* array, unsigned int length) {
+    assert(length <= INT_MAX);
+    mergesort((int)length, array);
+    unsigned int dest_index = 0;
+    unsigned int src_index = 0;
 
-int unique = 1;
-int current = temp[0];
-for (int f = 1; f < size; f++) {
-    if (current != temp[f]) {
-        current = temp[f];
-        unique++;
+    while (src_index < length) {
+        array[dest_index] = array[src_index];
+        src_index++;
+        else {
+            array[++dest_index] = array[src_index++];
+        }
     }
+
+    return dest_index + 1;
 }
 
-int* distinct = (int*) calloc(unique + 1, sizeof(int));
-distinct[0] = unique;
-distinct[1] = temp[0];
-current = temp[0];
-int distinctIndex = 2;
-
-for (int k = 1; k < size; k++) {
-    if (current != temp[k]) {
-        current = temp[k];
-        distinct[distinctIndex] = temp[k];
-        distinctIndex++;
-    }
-}
-
-free(temp);
-return distinct;
-}
