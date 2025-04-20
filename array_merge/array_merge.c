@@ -47,13 +47,13 @@ unsigned int make_unique(int* array, unsigned int length) {
     unsigned int src_index = 0;
 
     while (src_index < length) {
-        array[dest_index] = array[src_index];
+        if (array[dest_index] = array[src_index]) {
         src_index++;
+        }
         else {
             array[++dest_index] = array[src_index++];
         }
     }
-
     return dest_index + 1;
 }
 
