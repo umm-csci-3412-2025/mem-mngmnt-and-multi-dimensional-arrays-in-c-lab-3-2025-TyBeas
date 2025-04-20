@@ -14,12 +14,12 @@ int main(int argc, char** argv) {
 
     result = array_merge(num_arrays, sizes, a);
 
-    printf("Result:\n");
+    printf("result:\n");
     for (int i = 0; i <= result[0]; i++) {
         if (i != 0) {
             printf(", ");
         }
-        printf("%d ", result[i]);
+        printf("%i ", result[i]);
     }
 
     free(result);
