@@ -47,7 +47,7 @@ unsigned int uniqueCount(int* array, unsigned int length) {
     unsigned int src_index = 0;
 
     while (src_index < length) {
-        if ((array[dest_index] == array[src_index])) {
+        if (array[dest_index] == array[src_index]) {
         src_index++;
         }
         else {
