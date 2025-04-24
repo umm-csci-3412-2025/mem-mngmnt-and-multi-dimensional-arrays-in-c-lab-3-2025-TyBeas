@@ -31,16 +31,16 @@ for (unsigned int i = 0; i < (unsigned int) num_arrays; i++) {
     index += sizes[i];
     }
 
-unsigned int uniqueCount = make_unique(buffer + 1, total);
+unsigned int unique_c = uniqueCount(buffer + 1, total);
 
-assert(uniqueCount <= INT_MAX);
+assert(unique_c <= INT_MAX);
 
-buffer[0] = (int) uniqueCount;
+buffer[0] = (int) unique_c;
 
 return buffer;
 }
 
-unsigned int make_unique(int* array, unsigned int length) {
+unsigned int uniqueCount(int* array, unsigned int length) {
     assert(length <= INT_MAX);
     mergesort((int)length, array);
     unsigned int dest_index = 0;

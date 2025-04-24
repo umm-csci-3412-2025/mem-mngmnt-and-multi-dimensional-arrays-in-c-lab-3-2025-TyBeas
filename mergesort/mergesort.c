@@ -62,7 +62,7 @@ void merge_arrays(int* dest, unsigned int left_size, int* left, unsigned int rig
             left_index++;
         } else {
             dest[dest_index++] = right_value;
-            right_index;
+            right_index++;
         }
     }
 }
