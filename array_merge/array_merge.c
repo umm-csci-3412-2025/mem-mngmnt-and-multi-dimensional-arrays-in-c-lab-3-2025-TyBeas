@@ -56,4 +56,3 @@ unsigned int uniqueCount(int* array, unsigned int length) {
     }
     return dest_index + 1;
 }
-
