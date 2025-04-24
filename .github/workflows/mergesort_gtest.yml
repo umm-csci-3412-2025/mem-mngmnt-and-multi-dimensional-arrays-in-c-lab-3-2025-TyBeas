@@ -28,7 +28,7 @@ jobs:
     - name: Install gtest manually
       run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp lib/*.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
     - name: Check out the code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Compile test code
       run: g++ -Wall -g -o mergesort_test mergesort.c mergesort_test.cpp -lgtest -pthread -std=c++0x
       working-directory: mergesort
