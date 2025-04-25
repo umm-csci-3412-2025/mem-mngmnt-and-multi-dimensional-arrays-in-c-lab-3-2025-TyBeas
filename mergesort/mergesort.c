@@ -24,8 +24,8 @@ void int_mergesort(unsigned int size, int* values) {
     unsigned int left_length = size / 2;
     unsigned int right_length = size - left_length;
 
-    int* left_side = (int*) malloc(left_length * sizeof(int));
-    int* right_side = (int*) malloc(right_length * sizeof(int));
+    int* left_side = (int*) calloc(left_length, sizeof(int));
+    int* right_side = (int*) calloc(right_length, sizeof(int));
 
     memcpy(left_side, values, left_length * sizeof(int));
     memcpy(right_side, values + left_length, right_length * sizeof(int));
@@ -49,7 +49,7 @@ void merge_arrays(int* dest, unsigned int left_size, int* left, unsigned int rig
             memcpy(dest + dest_index, right + right_index, (right_size - right_index) * sizeof(int));
             return;
         }
-        if (right_index >= right_size) {
+        else if (right_index >= right_size) {
             memcpy(dest + dest_index, left + left_index, (left_size - left_index) * sizeof(int));
             return;
         }

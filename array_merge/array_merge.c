@@ -26,7 +26,8 @@ if (total == 0) {
 }
 
 unsigned int index = 1;
-for (unsigned int i = 0; i < (unsigned int) num_arrays; i++) {
+for (unsigned int i = 0; i < (unsigned int) num_arrays; i++)
+    {
     memcpy(buffer + index, values[i], sizes[i] * sizeof(int));
     index += sizes[i];
     }
