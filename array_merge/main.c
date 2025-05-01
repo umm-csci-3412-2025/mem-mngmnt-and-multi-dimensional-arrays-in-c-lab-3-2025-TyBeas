@@ -1,6 +1,6 @@
 #include "array_merge.h"
-
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char** argv) {
     int num_arrays = 9;
@@ -15,12 +15,14 @@ int main(int argc, char** argv) {
     result = array_merge(num_arrays, sizes, a);
 
     printf("result:\n");
-    for (int i = 0; i <= result[0]; i++) {
-        if (i != 0) {
+    for (int i = 1; i <= result[0]; i++) {  // Fix: start from 1 to print the unique elements
+        if (i != 1) {
             printf(", ");
         }
-        printf("%i ", result[i]);
+        printf("%i", result[i]);
     }
+    printf("\n");
 
     free(result);
+    return 0;
 }

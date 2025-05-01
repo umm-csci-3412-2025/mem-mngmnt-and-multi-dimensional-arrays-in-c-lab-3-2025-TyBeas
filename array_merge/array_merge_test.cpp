@@ -3,12 +3,9 @@
 #include "array_merge.h"
 
 void arrays_match(int size, int a[], int b[]) {
-    int i;
-
-    for (i=0; i<size; ++i) {
-    ASSERT_EQ(b[i], a[i]);
+    for (int i = 0; i < size; ++i) {
+        ASSERT_EQ(b[i], a[i]);
     }
-    free(a);
 }
 
 TEST(ArrayMerge, Handle_empty_list) {
