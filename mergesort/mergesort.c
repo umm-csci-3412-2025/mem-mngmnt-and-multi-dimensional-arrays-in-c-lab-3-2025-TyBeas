@@ -1,12 +1,18 @@
+#include "mergesort.h"
+
 #include <stdlib.h>
-#include <string.h>
 #include <assert.h>
+#include <string.h>
+
+// internal function to sort an array using mergesort
+void int_mergesort(unsigned int size, int* values);
+
+void merge_arrays(int* dest, unsigned int left_size, int* left, unsigned int right_side, int* right);
 
 // Sort arrays with size and values
 void mergesort(int raw_size, int* values) {
-    if (raw_size < 0) {
-        return; // Handle invalid input
-    }
+
+    assert(raw_size >= 0);
     unsigned int size = (unsigned int) raw_size;
 
     int_mergesort(size, values);
@@ -14,7 +20,7 @@ void mergesort(int raw_size, int* values) {
 
 // Internal function to sort an array using mergesort
 void int_mergesort(unsigned int size, int* values) {
-    if (size <= 1) {
+    if(size <= 1) {
         return;
     }
 
@@ -24,12 +30,6 @@ void int_mergesort(unsigned int size, int* values) {
 
     int* left_side = (int*) calloc(left_length, sizeof(int));
     int* right_side = (int*) calloc(right_length, sizeof(int));
-
-    if (!left_side || !right_side) {
-        free(left_side);
-        free(right_side);
-        return; // Handle memory allocation failure
-    }
 
     // Split the array into two halves
     memcpy(left_side, values, left_length * sizeof(int));
@@ -56,15 +56,22 @@ void merge_arrays(int* dest, unsigned int left_size, int* left, unsigned int rig
         if (left_index >= left_size) {
             memcpy(dest + dest_index, right + right_index, (right_size - right_index) * sizeof(int));
             return;
-        } else if (right_index >= right_size) {
+        }
+        else if (right_index >= right_size) {
             memcpy(dest + dest_index, left + left_index, (left_size - left_index) * sizeof(int));
             return;
         }
-        // Compare elements from both arrays and copy the smaller one
-        if (left[left_index] <= right[right_index]) {
-            dest[dest_index++] = left[left_index++];
+
+        // Compare the current elements of both arrays
+        int left_value = left[left_index];
+        int right_value = right[right_index];
+
+        if (left_value < right_value) {
+            dest[dest_index++] = left_value;
+            left_index++;
         } else {
-            dest[dest_index++] = right[right_index++];
+            dest[dest_index++] = right_value;
+            right_index++;
         }
     }
 }
